@@ -8,8 +8,8 @@ public class Renderer
         _drawables.ForEach(drawable => drawable.Draw());
     }
 
-    public void AddElementToDraw(IDrawable drawable)
+    public void AddElementsToDraw(IDrawable[] drawables)
     {
-        _drawables.Add(drawable);
+        _drawables.AddRange(drawables);
     }
 }

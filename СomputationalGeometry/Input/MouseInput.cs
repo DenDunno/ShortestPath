@@ -17,7 +17,7 @@ public class MouseInput
     {
         MouseState? mouseState = _window.MouseState;
 
-        if (mouseState.IsButtonDown(MouseButton.Button1))
+        if (mouseState.IsButtonDown(MouseButton.Button3))
         {
             var delta = new Vector2(-mouseState.Delta.X, mouseState.Delta.Y);
             _camera.Translate(delta * deltaTime);
