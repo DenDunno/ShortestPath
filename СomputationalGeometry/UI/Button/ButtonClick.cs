@@ -15,6 +15,7 @@ public class ButtonClick
     {
         if (CheckMouseInButtonRect(mousePosition))
         {
+            Console.WriteLine(mousePosition.X);
             _action?.Invoke();
         }
     }

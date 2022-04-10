@@ -4,11 +4,13 @@ using OpenTK.Windowing.Desktop;
 
 public class WindowFactory
 {
+    private readonly Renderer _renderer;
     private readonly GameWindowSettings _gameWindowSettings;
     private readonly NativeWindowSettings _nativeWindowSettings;
 
-    public WindowFactory()
+    public WindowFactory(Renderer renderer)
     {
+        _renderer = renderer;
         _gameWindowSettings = new GameWindowSettings();
         _nativeWindowSettings = new NativeWindowSettings()
         {
@@ -16,14 +18,15 @@ public class WindowFactory
             Location = new Vector2i(350, 150),
             Title = "Computational geometry",
             WindowBorder = WindowBorder.Fixed,
-            Flags = ContextFlags.ForwardCompatible,
-            Profile = ContextProfile.Core,
+            Flags = ContextFlags.Default,
+            Profile = ContextProfile.Compatability,
             API = ContextAPI.OpenGL
         };
     }
     
     public Window Create()
     {
-        return new Window(_gameWindowSettings, _nativeWindowSettings);
+        var windowSettings = new WindowSettings(_gameWindowSettings, _nativeWindowSettings);
+        return new Window(windowSettings, _renderer);
     }
 }

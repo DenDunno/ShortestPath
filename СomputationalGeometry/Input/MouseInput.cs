@@ -7,7 +7,7 @@ public class MouseInput
     private readonly Window _window;
     public event Action<Point> MousePressed = null!;
     
-    public MouseInput(Window window)
+    public MouseInput(Window window)    
     {
         _window = window;
         window.MouseDown += InvokeMouseEvent;

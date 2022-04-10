@@ -1,23 +1,23 @@
 ﻿using OpenTK.Graphics.OpenGL;
-using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 
 public class Window : GameWindow
 {
-    public Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings) : base(gameWindowSettings, nativeWindowSettings)
-    {
-    }
+    private readonly Renderer _renderer;
 
-    protected override void OnLoad()
+    public Window(WindowSettings windowSettings, Renderer renderer) 
+        : base(windowSettings.GameWindowSettings, windowSettings.NativeWindowSettings)
     {
-        GL.ClearColor(Color4.Black);
-        base.OnLoad();
+        _renderer = renderer;
     }
 
     protected override void OnRenderFrame(FrameEventArgs args)
     {
         GL.Clear(ClearBufferMask.ColorBufferBit);
+        
+        _renderer.Draw();
+
         SwapBuffers();
         base.OnRenderFrame(args);
     }
