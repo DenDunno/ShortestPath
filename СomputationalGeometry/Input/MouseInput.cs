@@ -1,23 +1,28 @@
-﻿using OpenTK.Windowing.Common;
+﻿using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
-
 
 public class MouseInput
 {
     private readonly Window _window;
-    public event Action<Point> MousePressed = null!;
+    private readonly Camera _camera;
+    private float _zoomSpeed = 50;
     
-    public MouseInput(Window window)    
+    public MouseInput(Window window, Camera camera)
     {
         _window = window;
-        window.MouseDown += InvokeMouseEvent;
+        _camera = camera;
     }
 
-    private void InvokeMouseEvent(MouseButtonEventArgs mouseButtonEventArgs)
+    public void Update(float deltaTime)
     {
-        if (mouseButtonEventArgs.Button == MouseButton.Button1)
+        MouseState? mouseState = _window.MouseState;
+
+        if (mouseState.IsButtonDown(MouseButton.Button1))
         {
-            MousePressed?.Invoke(new Point(_window.MousePosition));
+            var delta = new Vector2(-mouseState.Delta.X, mouseState.Delta.Y);
+            _camera.Translate(delta * deltaTime);
         }
+        
+        _camera.Zoom(-mouseState.ScrollDelta.Y * deltaTime * _zoomSpeed);
     }
 }

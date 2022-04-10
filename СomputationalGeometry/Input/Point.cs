@@ -1,4 +1,5 @@
-﻿using OpenTK.Mathematics;
+﻿using Newtonsoft.Json;
+using OpenTK.Mathematics;
 
 public class Point
 {
@@ -9,5 +10,12 @@ public class Point
     {
         X = position.X;
         Y = position.Y;
+    }
+    
+    [JsonConstructor]
+    public Point(float x, float y)
+    {
+        X = x;
+        Y = y;
     }
 }

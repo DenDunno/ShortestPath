@@ -1,12 +1,21 @@
-﻿using System.Drawing;
-using OpenTK.Mathematics;
-
-var renderer = new Renderer();
-var windowFactory = new WindowFactory(renderer);
+﻿
+var windowFactory = new WindowFactory();
 var window = windowFactory.Create();
-var mouseInput = new MouseInput(window);
-var buttonFactory = new ButtonFactory(mouseInput);
-var importButton = buttonFactory.Create(Color.Green, new Vector2i(100, 100), null);
+var renderer = new Renderer();
+var obstacles = new Obstacles();
+var obstaclesLoader = new ObstaclesLoader(obstacles);
+var commands = new Commands(obstaclesLoader);
+var keyboardInput = new KeyboardInput(window, commands);
+var camera = new Camera();
+var mouseInput = new MouseInput(window, camera);
 
-renderer.DrawElements(new IDrawable []{importButton.View});
+window.FrameRendering += deltaTime =>
+{
+    keyboardInput.Update();
+    mouseInput.Update(deltaTime);
+    renderer.Draw();
+    camera.Draw();
+};
+
+renderer.AddElementToDraw(obstacles);
 window.Run();

@@ -4,20 +4,18 @@ using OpenTK.Windowing.Desktop;
 
 public class Window : GameWindow
 {
-    private readonly Renderer _renderer;
-
-    public Window(WindowSettings windowSettings, Renderer renderer) 
-        : base(windowSettings.GameWindowSettings, windowSettings.NativeWindowSettings)
+    public event Action<float> FrameRendering = null!;
+    
+    public Window(WindowSettings windowSettings) : base(windowSettings.GameWindowSettings, windowSettings.NativeWindowSettings)
     {
-        _renderer = renderer;
     }
 
     protected override void OnRenderFrame(FrameEventArgs args)
     {
         GL.Clear(ClearBufferMask.ColorBufferBit);
-        
-        _renderer.Draw();
 
+        FrameRendering?.Invoke((float)args.Time);
+        
         SwapBuffers();
         base.OnRenderFrame(args);
     }

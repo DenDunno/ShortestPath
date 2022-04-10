@@ -4,13 +4,11 @@ using OpenTK.Windowing.Desktop;
 
 public class WindowFactory
 {
-    private readonly Renderer _renderer;
     private readonly GameWindowSettings _gameWindowSettings;
     private readonly NativeWindowSettings _nativeWindowSettings;
 
-    public WindowFactory(Renderer renderer)
+    public WindowFactory()
     {
-        _renderer = renderer;
         _gameWindowSettings = new GameWindowSettings();
         _nativeWindowSettings = new NativeWindowSettings()
         {
@@ -27,6 +25,6 @@ public class WindowFactory
     public Window Create()
     {
         var windowSettings = new WindowSettings(_gameWindowSettings, _nativeWindowSettings);
-        return new Window(windowSettings, _renderer);
+        return new Window(windowSettings);
     }
 }
