@@ -4,11 +4,12 @@ public class Commands
 {
     private readonly List<Command> _commands;
 
-    public Commands(ObstaclesLoader obstaclesLoader)
+    public Commands(ObstaclesLoader obstaclesLoader, CoordinateSystem coordinateSystem)
     {
         _commands = new List<Command>()
         {
-            new Command(Keys.I, obstaclesLoader.Load),
+            new(Keys.I, obstaclesLoader.Load),
+            new(Keys.D, coordinateSystem.Toggle),
         };
     }
 

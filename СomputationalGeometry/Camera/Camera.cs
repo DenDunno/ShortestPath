@@ -1,7 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 
-public class Camera
+public class Camera : IDrawable
 {
     private Vector2 _position;
     private float _size = 1;
@@ -18,7 +18,7 @@ public class Camera
         _position += delta;
     }
 
-    public void Draw()
+    void IDrawable.Draw()
     {
         GL.MatrixMode(MatrixMode.Projection);
         GL.LoadIdentity();

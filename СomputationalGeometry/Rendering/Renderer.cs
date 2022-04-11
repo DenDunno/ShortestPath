@@ -1,15 +1,16 @@
-﻿
+﻿using System.Collections.ObjectModel;
+
 public class Renderer
 {
-    private readonly List<IDrawable> _drawables = new();
-    
+    private readonly ReadOnlyCollection<IDrawable> _drawables;
+
+    public Renderer(IDrawable[] drawables)
+    {
+        _drawables = new ReadOnlyCollection<IDrawable>(drawables);
+    }
+
     public void Draw()
     {
         _drawables.ForEach(drawable => drawable.Draw());
-    }
-
-    public void AddElementsToDraw(IDrawable[] drawables)
-    {
-        _drawables.AddRange(drawables);
     }
 }
