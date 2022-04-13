@@ -2,18 +2,19 @@
 
 public class ShortestPathLine : IDrawable
 {
-    private readonly Point _start;
-    private readonly Point _destination = new(1, -0.5f);
+    private readonly KeyPoint _start;
+    private readonly KeyPoint _destination;
     private readonly ShortestPathAlgorithm _shortestPathAlgorithm = new();
-    
-    public ShortestPathLine(Point start)
+
+    public ShortestPathLine(KeyPoint startPoint, KeyPoint destinationPoint)
     {
-        _start = start;
+        _start = startPoint;
+        _destination = destinationPoint;
     }
 
     void IDrawable.Draw()
     {
-        List<Point> pathPoints = _shortestPathAlgorithm.Evaluate(_start, _destination);
+        List<Point> pathPoints = _shortestPathAlgorithm.Evaluate(_start.Point, _destination.Point);
 
         DrawPathLine(pathPoints);
         DrawKeyCircles();
@@ -22,15 +23,15 @@ public class ShortestPathLine : IDrawable
 
     private void DrawKeyCircles()
     {
-        GLHelper.DrawCircle(_start, 0.05f, Color4.Lime);
-        GLHelper.DrawCircle(_destination, 0.05f, Color4.Lime);
+        GLHelper.DrawCircle(_start.Point, 0.05f, Color4.Lime);
+        GLHelper.DrawCircle(_destination.Point, 0.05f, Color4.Lime);
     }
 
     private void DrawPathLine(List<Point> pathPoints)
     {
         var path = new List<Point>(pathPoints);
-        path.Insert(0, _start);
-        path.Add(_destination);
+        path.Insert(0, _start.Point);
+        path.Add(_destination.Point);
         
         GLHelper.DrawLine(path, 0.02f, Color4.Aqua);
     }

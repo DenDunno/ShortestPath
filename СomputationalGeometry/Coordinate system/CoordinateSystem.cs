@@ -39,7 +39,7 @@ public class CoordinateSystem : IDrawable
     private void DrawMarks(bool isHorizontal)
     {
         GL.LineWidth(_mark.Width);
-        GL.Color3(Color.Red);
+        GL.Color3(Color.Orange);
         GL.Begin(PrimitiveType.Lines);
         
         for (float i = -_axis.Length; i <= _axis.Length; ++i)
