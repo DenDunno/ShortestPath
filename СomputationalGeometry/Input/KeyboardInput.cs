@@ -1,26 +1,24 @@
 ﻿using OpenTK.Windowing.GraphicsLibraryFramework;
 
-public class KeyboardInput
+public class KeyboardInput : IUpdatable
 {
-    private readonly Window _window;
+    private readonly KeyboardState _keyboardState;
     private readonly Commands _commands;
     private bool _isAnyKeyDown;
     
-    public KeyboardInput(Window window, Commands commands)
+    public KeyboardInput(KeyboardState keyboardState, Commands commands)
     {
-        _window = window;
+        _keyboardState = keyboardState;
         _commands = commands;
     }
-
-    public void Update()
+    
+    void IUpdatable.Update(float deltaTime)
     {
-        KeyboardState state = _window.KeyboardState;
-
         if (_isAnyKeyDown == false)
         {
-            _commands.TryInvokeCommand(state);
+            _commands.TryInvokeCommand(_keyboardState);
         }
 
-        _isAnyKeyDown = state.IsAnyKeyDown;
+        _isAnyKeyDown = _keyboardState.IsAnyKeyDown;
     }
 }

@@ -3,12 +3,11 @@
 public class ShortestPathLine : IDrawable
 {
     private readonly Point _start;
-    private readonly Point _destination;
+    private readonly Point _destination = new(1, -0.5f);
 
-    public ShortestPathLine(Point start, Point destination)
+    public ShortestPathLine(Point start)
     {
         _start = start;
-        _destination = destination;
     }
 
     void IDrawable.Draw()

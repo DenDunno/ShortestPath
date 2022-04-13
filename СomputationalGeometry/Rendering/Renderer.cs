@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-public class Renderer
+public class Renderer : IUpdatable
 {
     private readonly ReadOnlyCollection<IDrawable> _drawables;
 
@@ -9,7 +9,12 @@ public class Renderer
         _drawables = new ReadOnlyCollection<IDrawable>(drawables);
     }
 
-    public void Draw()
+    void IUpdatable.Update(float deltaTime)
+    {
+        Draw();
+    }
+
+    private void Draw()
     {
         _drawables.ForEach(drawable => drawable.Draw());
     }

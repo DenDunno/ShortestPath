@@ -1,28 +1,26 @@
 ﻿using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 
-public class MouseInput
+public class MouseInput : IUpdatable
 {
-    private readonly Window _window;
+    private readonly MouseState _mouseState;
     private readonly Camera _camera;
     private float _zoomSpeed = 50;
     
-    public MouseInput(Window window, Camera camera)
+    public MouseInput(MouseState mouseState, Camera camera)
     {
-        _window = window;
+        _mouseState = mouseState;
         _camera = camera;
     }
 
-    public void Update(float deltaTime)
+    void IUpdatable.Update(float deltaTime)
     {
-        MouseState? mouseState = _window.MouseState;
-
-        if (mouseState.IsButtonDown(MouseButton.Button3))
+        if (_mouseState.IsButtonDown(MouseButton.Button3))
         {
-            var delta = new Vector2(-mouseState.Delta.X, mouseState.Delta.Y);
+            var delta = new Vector2(-_mouseState.Delta.X, _mouseState.Delta.Y);
             _camera.Translate(delta * deltaTime);
         }
         
-        _camera.Zoom(-mouseState.ScrollDelta.Y * deltaTime * _zoomSpeed);
+        _camera.Zoom(-_mouseState.ScrollDelta.Y * deltaTime * _zoomSpeed);
     }
 }
