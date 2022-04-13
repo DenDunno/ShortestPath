@@ -18,4 +18,18 @@ public static class GLHelper
         GL.End();
         GL.Disable(EnableCap.Blend);
     }
+    
+    public static void DrawLine(List<Point> points, float width, Color4 color)
+    {
+        GL.Color4(color);
+        GL.LineWidth(width);
+        GL.Begin(PrimitiveType.LineStrip);
+
+        foreach (Point point in points)
+        {
+            GL.Vertex2(point.X, point.Y);
+        }
+
+        GL.End();
+    }
 }
