@@ -6,6 +6,7 @@ public class MouseInput : IUpdatable
     private readonly MouseState _mouseState;
     private readonly Camera _camera;
     private float _zoomSpeed = 50;
+    private float _translationSpeed = 2;
     
     public MouseInput(MouseState mouseState, Camera camera)
     {
@@ -18,7 +19,7 @@ public class MouseInput : IUpdatable
         if (_mouseState.IsButtonDown(MouseButton.Button3))
         {
             var delta = new Vector2(-_mouseState.Delta.X, _mouseState.Delta.Y);
-            _camera.Translate(delta * deltaTime);
+            _camera.Translate(_translationSpeed * delta * deltaTime);
         }
         
         _camera.Zoom(-_mouseState.ScrollDelta.Y * deltaTime * _zoomSpeed);

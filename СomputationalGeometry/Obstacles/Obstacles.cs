@@ -3,16 +3,16 @@ using OpenTK.Graphics.OpenGL;
 
 public class Obstacles : IDrawable
 {
-    private List<List<Point>> _obstacles = new();
+    public List<List<Point>> Points { get; private set; } = new();
 
-    public void SetPoints(List<List<Point>> obstacles)
+    public void SetPoints(List<List<Point>> points)
     {
-        _obstacles = obstacles;
+        Points = points;
     }
 
     void IDrawable.Draw()
     {
-        foreach (List<Point> obstacle in _obstacles)
+        foreach (List<Point> obstacle in Points)
         {
             GL.Begin(PrimitiveType.Polygon);
             GL.Color3(Color.Red);

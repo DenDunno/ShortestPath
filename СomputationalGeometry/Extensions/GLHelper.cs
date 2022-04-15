@@ -21,6 +21,7 @@ public static class GLHelper
     
     public static void DrawLine(List<Point> points, float width, Color4 color)
     {
+        GL.Enable(EnableCap.Blend);
         GL.Color4(color);
         GL.LineWidth(width);
         GL.Begin(PrimitiveType.LineStrip);
@@ -31,5 +32,6 @@ public static class GLHelper
         }
 
         GL.End();
+        GL.Disable(EnableCap.Blend);
     }
 }

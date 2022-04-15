@@ -5,7 +5,7 @@ public class KeyPoint : IUpdatable
 {
     private readonly MouseState _mouseState;
     private readonly ScreenToWorldCoordinates _screenToWorldCoordinates = new();
-    private readonly float _radius = 0.05f;
+    private readonly float _radius = 0.1f;
     private bool _selected;
     
     public KeyPoint(float x, float y, MouseState mouseState)

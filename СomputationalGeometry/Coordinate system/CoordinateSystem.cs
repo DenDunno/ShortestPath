@@ -6,22 +6,13 @@ public class CoordinateSystem : IDrawable
 {
     private readonly LineSettings _axis = new(2, 20);
     private readonly LineSettings _mark = new(4, 0.05f);
-    private bool _isRendering;
-    
-    public void Toggle()
-    {
-        _isRendering = !_isRendering;
-    }
-    
+
     void IDrawable.Draw()
     {
-        if (_isRendering)
-        {
-            DrawAxis();
+        DrawAxis();
             
-            DrawMarks(true);
-            DrawMarks(false);
-        }
+        DrawMarks(true);
+        DrawMarks(false);
     }
 
     private void DrawAxis()

@@ -1,16 +1,13 @@
-﻿using OpenTK.Windowing.GraphicsLibraryFramework;
+﻿using System.Collections.ObjectModel;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
 public class Commands
 {
-    private readonly List<Command> _commands;
+    private readonly ReadOnlyCollection<Command> _commands;
 
-    public Commands(ObstaclesLoader obstaclesLoader, CoordinateSystem coordinateSystem)
+    public Commands(List<Command> commands)
     {
-        _commands = new List<Command>()
-        {
-            new(Keys.I, obstaclesLoader.Load),
-            new(Keys.D, coordinateSystem.Toggle),
-        };
+        _commands = new ReadOnlyCollection<Command>(commands);
     }
 
     public void TryInvokeCommand(KeyboardState keyboardState)

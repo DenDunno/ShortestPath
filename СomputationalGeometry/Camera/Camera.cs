@@ -4,7 +4,7 @@ using OpenTK.Mathematics;
 public class Camera : IDrawable
 {
     private Vector2 _position;
-    private float _size = 1;
+    private float _size = 3;
     private readonly float _translationSpeed = 3f;
     private readonly int _width = 4;
     private readonly int _height = 3;

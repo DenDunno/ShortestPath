@@ -1,10 +1,10 @@
 ﻿
-public class ObstaclesLoader
+public class ObstaclesLoading
 {
     private readonly ObstacleParser _obstacleParser;
     private readonly Obstacles _obstacles;
 
-    public ObstaclesLoader(Obstacles obstacles)
+    public ObstaclesLoading(Obstacles obstacles)
     {
         _obstacleParser = new ObstacleParser("obstacles.json");
         _obstacles = obstacles;
