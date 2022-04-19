@@ -29,7 +29,7 @@ public class Graph : IDrawable
     {
         foreach (Edge edge in _edges)
         {
-            GLHelper.DrawLine(new List<Point>(){edge.LeftPoint, edge.RightPoint}, 0.01f, Color4.Yellow);
+            GlHelper.DrawLine(new List<Point>(){edge.LeftPoint, edge.RightPoint}, 0.01f, Color4.Yellow);
         }
     }
 }

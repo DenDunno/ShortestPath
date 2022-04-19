@@ -14,7 +14,7 @@ public static class GeometricAlgorithms
 
         float denominator = (y4 - y3) * (x1 - x2) - (x4 - x3) * (y1 - y2);
         
-        if (denominator == 0 || IsChain(edge1, edge2))
+        if (denominator == 0 || IsChain(in edge1, in edge2))
         {
             return false;
         }
@@ -28,9 +28,22 @@ public static class GeometricAlgorithms
         return (uA is >= 0 and <= 1) && (uB is >= 0 and <= 1);
     }
 
-    private static bool IsChain(Edge edge1, Edge edge2)
+    private static bool IsChain(in Edge edge1, in Edge edge2)
     {
-        return edge1.LeftPoint.Equals(edge2.LeftPoint) || edge1.LeftPoint.Equals(edge2.RightPoint) ||
-               edge1.RightPoint.Equals(edge2.LeftPoint) || edge1.RightPoint.Equals(edge2.RightPoint);
+        return IsPointEqual(in edge1.LeftPoint, in edge2.LeftPoint) ||
+               IsPointEqual(in edge1.LeftPoint, in edge2.RightPoint) ||
+               IsPointEqual(in edge1.RightPoint, in edge2.LeftPoint) ||
+               IsPointEqual(in edge1.RightPoint, in edge2.RightPoint);
+    }
+
+    public static bool IsPointEqual(in Point point1, in Point point2)
+    {
+        return Math.Abs(point1.X - point2.X) < float.Epsilon && Math.Abs(point1.Y - point2.Y) < float.Epsilon;
+    }
+    
+    public static bool IsEdgeEqual(in Edge edge1, in Edge edge2)
+    {
+        return IsPointEqual(in edge1.LeftPoint, in edge2.LeftPoint) 
+               && IsPointEqual(in edge1.RightPoint, in edge2.RightPoint);
     }
 }

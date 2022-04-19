@@ -27,8 +27,8 @@ public class ShortestPath : IDrawable, IUpdatable
 
     private void DrawKeyCircles()
     {
-        GLHelper.DrawCircle(_start.Point, 0.1f, Color4.Lime);
-        GLHelper.DrawCircle(_destination.Point, 0.1f, Color4.Lime);
+        GlHelper.DrawCircle(_start.Point, 0.1f, Color4.Lime);
+        GlHelper.DrawCircle(_destination.Point, 0.1f, Color4.Lime);
     }
 
     private void DrawPathLine(List<Point> pathPoints)
@@ -37,6 +37,6 @@ public class ShortestPath : IDrawable, IUpdatable
         path.Insert(0, _start.Point);
         path.Add(_destination.Point);
         
-        GLHelper.DrawLine(path, 3f, Color4.Aqua);
+        GlHelper.DrawLine(path, 3f, Color4.Aqua);
     }
 }

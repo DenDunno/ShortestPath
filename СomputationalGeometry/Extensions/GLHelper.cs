@@ -1,7 +1,7 @@
 ﻿using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 
-public static class GLHelper
+public static class GlHelper
 {
     public static void DrawCircle(Point point, float radius, Color4 color)
     {

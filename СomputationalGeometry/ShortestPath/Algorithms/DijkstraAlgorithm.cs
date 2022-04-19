@@ -67,9 +67,9 @@ public class DijkstraAlgorithm
     {
         foreach (Edge edge in _visibilityGraph.Edges)
         {
-            if (IsEquals(in edge.LeftPoint, in targetPoint) || IsEquals(in edge.RightPoint, in targetPoint))
+            if (HasConnection(edge, targetPoint))
             {
-                Point newPathPoint = IsEquals(in edge.LeftPoint, in targetPoint) ? edge.RightPoint : edge.LeftPoint;
+                Point newPathPoint = GeometricAlgorithms.IsPointEqual(in edge.LeftPoint, in targetPoint) ? edge.RightPoint : edge.LeftPoint;
                 float distanceToNewVertex = _minDistanceToVertex[targetPoint] + edge.Magnitude;
 
                 if (distanceToNewVertex < _minDistanceToVertex[newPathPoint])
@@ -85,13 +85,13 @@ public class DijkstraAlgorithm
         _pathPoints.Clear();
         _pathPoints.Add(_destination.Point);
 
-        for (Point currentPoint = _destination.Point; IsEquals(in currentPoint, _start.Point) == false;)
+        for (Point currentPoint = _destination.Point; GeometricAlgorithms.IsPointEqual(in currentPoint, _start.Point) == false;)
         {
             foreach (Edge edge in _visibilityGraph.Edges)
             {
-                if (IsEquals(in edge.LeftPoint, in currentPoint) || IsEquals(in edge.RightPoint, in currentPoint))
+                if (HasConnection(in edge, in currentPoint))
                 {
-                    Point newPathPoint = IsEquals(in edge.LeftPoint, in currentPoint) ? edge.RightPoint : edge.LeftPoint;
+                    Point newPathPoint = GeometricAlgorithms.IsPointEqual(in edge.LeftPoint, in currentPoint) ? edge.RightPoint : edge.LeftPoint;
                     float distanceToNewVertex = _minDistanceToVertex[currentPoint] - edge.Magnitude;
         
                     if (_minDistanceToVertex[newPathPoint] - distanceToNewVertex < 0.0001f)
@@ -109,8 +109,9 @@ public class DijkstraAlgorithm
         return _pathPoints.GetRange(1, _pathPoints.Count - 2);
     }
 
-    private bool IsEquals(in Point point1, in Point point2)
+    private bool HasConnection(in Edge edge, in Point point)
     {
-        return Math.Abs(point1.X - point2.X) < float.Epsilon && Math.Abs(point1.Y - point2.Y) < float.Epsilon;
+        return GeometricAlgorithms.IsPointEqual(in edge.LeftPoint, in point) ||
+               GeometricAlgorithms.IsPointEqual(in edge.RightPoint, in point);
     }
 }

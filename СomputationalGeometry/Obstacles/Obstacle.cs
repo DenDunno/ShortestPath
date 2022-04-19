@@ -38,9 +38,30 @@ public class Obstacle : IDrawable
         GL.End();
     }
 
-    public bool IsInside(Edge visibleEdge)
+    public bool IsInside(in Edge visibilityEdge)
     {
-        return _points.Contains(visibleEdge.LeftPoint) && _points.Contains(visibleEdge.RightPoint) 
-                                                       && !_edges.Any(edge => edge.Equals(visibleEdge));
+        foreach (Edge obstacleEdge in _edges)
+        {
+            if (GeometricAlgorithms.IsEdgeEqual(obstacleEdge, visibilityEdge))
+            {
+                return false;
+            }
+        }
+
+        var midPoint = visibilityEdge.MiddlePoint;
+        const float xRaycastOffset = 100;
+        const float yRaycastOffset = 1;
+        var raycastEdge = new Edge(midPoint, new Point(midPoint.X + xRaycastOffset, midPoint.Y + yRaycastOffset));
+        int intersections = 0;
+        
+        foreach (Edge edge in _edges)
+        {
+            if (GeometricAlgorithms.IsLineIntersect(edge, raycastEdge))
+            {
+                intersections++;
+            }
+        }
+
+        return intersections % 2 != 0;
     }
 }

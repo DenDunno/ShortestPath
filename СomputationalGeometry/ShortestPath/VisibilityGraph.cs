@@ -18,7 +18,7 @@ public class VisibilityGraph : IDrawable
         {
             foreach (Point point2 in allPoints)
             {
-                if (point1.Equals(point2))
+                if (GeometricAlgorithms.IsPointEqual(in point1, in point2))
                     continue;
                 
                 var visibleEdge = new Edge(point1, point2);
@@ -26,7 +26,7 @@ public class VisibilityGraph : IDrawable
 
                 for (int i = 0; i < _obstacles.Value.Count && isVisible; ++i)
                 {
-                    isVisible = !_obstacles.Value[i].IsInside(visibleEdge);
+                    isVisible = !_obstacles.Value[i].IsInside(in visibleEdge);
                     
                     for (int j = 0; j < _obstacles.Value[i].Edges.Count && isVisible; ++j)
                     {
