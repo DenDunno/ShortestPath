@@ -9,7 +9,9 @@ public class WindowFactory
 
     public WindowFactory()
     {
-        _gameWindowSettings = new GameWindowSettings();
+        _gameWindowSettings = new GameWindowSettings()
+        {
+        };
         _nativeWindowSettings = new NativeWindowSettings()
         {
             Size = new Vector2i(1200, 800),
@@ -25,6 +27,9 @@ public class WindowFactory
     public Window Create()
     {
         var windowSettings = new WindowSettings(_gameWindowSettings, _nativeWindowSettings);
-        return new Window(windowSettings);
+        var window = new Window(windowSettings);
+        window.VSync = VSyncMode.On;
+
+        return window;
     }
 }

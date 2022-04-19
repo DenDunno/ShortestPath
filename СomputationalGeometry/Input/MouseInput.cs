@@ -5,8 +5,8 @@ public class MouseInput : IUpdatable
 {
     private readonly MouseState _mouseState;
     private readonly Camera _camera;
-    private float _zoomSpeed = 50;
-    private float _translationSpeed = 2;
+    private readonly float _zoomSpeed = 25;
+    private readonly float _translationSpeed = 0.5f;
     
     public MouseInput(MouseState mouseState, Camera camera)
     {

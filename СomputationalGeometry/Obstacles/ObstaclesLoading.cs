@@ -12,6 +12,6 @@ public class ObstaclesLoading
 
     public void Load()
     {
-        _obstacles.SetPoints(_obstacleParser.Parse());
+        _obstacles.SetObstacles(_obstacleParser.Parse());
     }
 }

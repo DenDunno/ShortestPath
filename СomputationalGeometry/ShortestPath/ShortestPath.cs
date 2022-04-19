@@ -1,10 +1,11 @@
 ﻿using OpenTK.Mathematics;
 
-public class ShortestPath : IDrawable
+public class ShortestPath : IDrawable, IUpdatable
 {
     private readonly KeyPoint _start;
     private readonly KeyPoint _destination;
     private readonly ShortestPathAlgorithm _shortestPathAlgorithm;
+    private List<Point> _pathPoints = new();
 
     public ShortestPath(KeyPoint startPoint, KeyPoint destinationPoint, VisibilityGraph visibilityGraph)
     {
@@ -13,13 +14,15 @@ public class ShortestPath : IDrawable
         _shortestPathAlgorithm = new ShortestPathAlgorithm(visibilityGraph);
     }
 
+    void IUpdatable.Update(float deltaTime)
+    {
+        _pathPoints = _shortestPathAlgorithm.Evaluate(_start, _destination);
+    }
+    
     void IDrawable.Draw()
     {
-        List<Point> pathPoints = _shortestPathAlgorithm.Evaluate(_start.Point, _destination.Point);
-
-        DrawPathLine(pathPoints);
+        DrawPathLine(_pathPoints);
         DrawKeyCircles();
-        DrawPathCircles(pathPoints);
     }
 
     private void DrawKeyCircles()
@@ -35,13 +38,5 @@ public class ShortestPath : IDrawable
         path.Add(_destination.Point);
         
         GLHelper.DrawLine(path, 3f, Color4.Aqua);
-    }
-
-    private void DrawPathCircles(List<Point> pathPoints)
-    {
-        foreach (Point pathPoint in pathPoints)
-        {
-            GLHelper.DrawCircle(pathPoint, 0.05f, Color4.Yellow);
-        }
     }
 }

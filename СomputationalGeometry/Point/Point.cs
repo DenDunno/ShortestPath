@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-public class Point
+public struct Point
 {
     public readonly float X;
     public readonly float Y;

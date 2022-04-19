@@ -1,28 +1,24 @@
-﻿using System.Drawing;
-using OpenTK.Graphics.OpenGL;
-
+﻿
 public class Obstacles : IDrawable
 {
-    public List<List<Point>> Points { get; private set; } = new();
+    private readonly List<Obstacle> _obstacles = new();
+    public IReadOnlyList<Obstacle> Value => _obstacles;
 
-    public void SetPoints(List<List<Point>> points)
+    public void SetObstacles(List<List<Point>> obstacles)
     {
-        Points = points;
+        _obstacles.Clear();
+
+        foreach (List<Point> obstaclePoints in obstacles)
+        {
+            _obstacles.Add(new Obstacle(obstaclePoints));
+        }
     }
 
     void IDrawable.Draw()
     {
-        foreach (List<Point> obstacle in Points)
+        foreach (IDrawable obstacle in _obstacles)
         {
-            GL.Begin(PrimitiveType.Polygon);
-            GL.Color3(Color.Red);
-            
-            foreach (Point point in obstacle)    
-            {
-                GL.Vertex2(point.X, point.Y);
-            }
-            
-            GL.End();
+            obstacle.Draw();
         }
     }
 }

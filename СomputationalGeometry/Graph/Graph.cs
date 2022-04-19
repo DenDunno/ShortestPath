@@ -2,11 +2,27 @@
 
 public class Graph : IDrawable
 {
-    private List<Edge> _edges = new();
+    private readonly List<Edge> _edges = new();
+    private readonly List<Point> _vertices = new();
+
+    public IReadOnlyList<Edge> Edges => _edges;
+    public IReadOnlyList<Point> Vertices => _vertices;
     
-    public void AddEdge(Point point1, Point point2)
+    public void AddEdge(Edge edge)
     {
-        _edges.Add(new Edge(point1, point2));
+        TryAddVertex(edge.LeftPoint);
+        TryAddVertex(edge.RightPoint);
+        
+        if (!_edges.Contains(edge) && !_edges.Contains(new Edge(edge.RightPoint, edge.LeftPoint)))
+            _edges.Add(edge);
+    }
+
+    private void TryAddVertex(Point point)
+    {
+        if (_vertices.Contains(point) == false)
+        {
+            _vertices.Add(point);
+        }
     }
 
     public void Draw()
@@ -14,12 +30,6 @@ public class Graph : IDrawable
         foreach (Edge edge in _edges)
         {
             GLHelper.DrawLine(new List<Point>(){edge.LeftPoint, edge.RightPoint}, 0.01f, Color4.Yellow);
-        }
-        
-        foreach (Edge edge in _edges)
-        {
-            GLHelper.DrawCircle(edge.LeftPoint, 0.05f, Color4.Blue);
-            GLHelper.DrawCircle(edge.RightPoint, 0.05f, Color4.Blue);
         }
     }
 }
