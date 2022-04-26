@@ -4,7 +4,7 @@ using OpenTK.Mathematics;
 
 public class CoordinateSystem : IDrawable
 {
-    private readonly LineSettings _axis = new(2, 20);
+    private readonly LineSettings _axis = new(2, 50);
     private readonly LineSettings _mark = new(4, 0.05f);
 
     void IDrawable.Draw()
