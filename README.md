@@ -1,5 +1,3 @@
-### <p align="center">Науково-практичний звіт  </p>
-#### <p align="center"> студента 3 курсу Бондара Дениса, групи ТК-31 на тему</p>
 ## <p align="center">Найкоротші шляхи на множині перешкод у 2D </p>
 
 ### <p align="center">1. Вступ</p>
@@ -70,11 +68,3 @@
   <img src="https://github.com/DenDunno/ComputationalGeometry/blob/master/Report/Gif.gif?raw=true"/>
 </p>
 <p align="center">Приклад роботи</p>
-
-### <p align="center">4. [Код](https://github.com/DenDunno/ComputationalGeometry)</p>
-### <p align="center">5. Список літератури</p>
-
-https://graphics.stanford.edu/courses/cs268-09-winter/notes/handout7.pdf
-https://page.mi.fu-berlin.de/mulzer/notes/alggeo/polySP.pdf
-https://fribbels.github.io/shortestpath/writeup.html
-https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
