@@ -65,6 +65,6 @@
 </p>
 <p align="center">Граф видимості</p>
 <p align="center">
-  <img src="https://github.com/DenDunno/ComputationalGeometry/blob/master/Report/Report.gif?raw=true"/>
+  <img src="https://github.com/DenDunno/ComputationalGeometry/blob/master/Report/Gif2.gif?raw=true"/>
 </p>
 <p align="center">Приклад роботи</p>
