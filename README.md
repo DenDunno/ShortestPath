@@ -1,70 +1,59 @@
-## <p align="center">Найкоротші шляхи на множині перешкод у 2D </p>
+<p align="center">Shortest Paths in a Set of Obstacles in 2D </p>
+<p align="center">1. Introduction</p>
+Problem. Given a set of obstacles represented as polygons with a total of n vertices, find the shortest path between two query points, S and T, for each possible configuration.
 
-### <p align="center">1. Вступ</p>
+Applications: Robotics, GPS, Gamedev (AI bots), etc.
 
-**Задача.** На заданій множині h перешкод, (являють собою полігони, сумарна кількість вершин яких рівна n) для кожного розташування запитних точок S і T знайти найкоротший шлях між ними. 
-
-**Застосування** Робототехніка, GPS, Gamedev (AI ботів), тощо
-
-### <p align="center">2. Основна частина</p>
-
-Розв'язання задачі найкоротшого шляху переважно складається з двох етапів:
+<p align="center">2. Main Part</p>
+Solving the shortest path problem mainly involves two stages:
 
 <ul>  
-<li>Побудова графу видимості</li>  
-<li>Пошук найкоротшого шляху по графу</li>  
+<li>Constructing the visibility graph</li>  
+<li>Finding the shortest path in the graph</li>  
 </ul>
-
-Граф видимості - це граф взаємної видимості точок простору, зазвичай для безлічі точок та перешкод на евклідовій площині. 
-Між точками існує видимість, якшо відрізок між цими точками не перетинає жодну перешкоду. 
-Ребра перешкод автоматично входять до графу.
+The visibility graph is a graph of mutual visibility between points in space, usually for a multitude of points and obstacles on the Euclidean plane. Visibility exists between two points if the line segment connecting them does not intersect any obstacles. Edges of obstacles automatically become part of the graph.
 
 <p align="center">
   <img src="https://github.com/DenDunno/ComputationalGeometry/blob/master/Report/graph.png?raw=true"/>
 </p>
+<p align="center">Example</p>
+Constructing the visibility graph is the most challenging part of the shortest path problem. The most popular algorithms include:
 
-<p align="center">Приклад</p>
+Naive algorithm $O(n^3)$
+Lee's Algorithm $O(n^2*log(n))$
 
-Побудова графу видимості - найскладніша частина задачі найкоротшого шляху.
-Найпопулярніші алгоритми:
+In this work, I chose the naive algorithm as it is the simplest and most intuitively understandable.
 
-Наївний алгоритм $O(n^3)$	
-[Алгоритм Лі](http://www.science.smith.edu/~istreinu/Teaching/Courses/274/Spring98/Projects/Philip/fp/algVisibility.htm) $O(n^2*log(n))$
+The essence is simple: for each of the $n$ points, check $n - 1$ visibility edges for intersection with $n$ obstacle edges. If there is no intersection, add the edge to the graph.
 
-У своїй роботі я обрав наївний, так як він найпростіший та інтуітивно зрозумілий.
+There are many algorithms for finding the shortest path in a graph. In this work, I chose the Dijkstra's algorithm $O(n^2)$.
 
-Суть проста: для кожної з $n$ точок перевіряється $n - 1$ ребер видимості на перетин з $n$ ребрами перешкод. Якшо перетину немає, заносимо ребро до графу.
+Total algorithm complexity = $O(n^3)$
 
-Існує [багато](https://uk.wikipedia.org/wiki/%D0%97%D0%B0%D0%B4%D0%B0%D1%87%D0%B0_%D0%BF%D1%80%D0%BE_%D0%BD%D0%B0%D0%B9%D0%BA%D0%BE%D1%80%D0%BE%D1%82%D1%88%D0%B8%D0%B9_%D1%88%D0%BB%D1%8F%D1%85) алгоритмів найкоротшого шляху у графі. У своїй роботі я обрав **алгоритм Дейкстри** $O(n^2)$.
+<p align="center">3. Practical Part</p>
+For the practical implementation, I chose the C# programming language and the OpenTK graphics library, which provides access to OpenGL tools.
 
-**Сумарна складність алгоритму** = $O(n^3)$
+The program starts with importing and parsing obstacles, stored in a regular JSON file.
 
-### <p align="center">3. Практична частина</p>
-
-Для виконання практичної роботи, я обрав мову програмування C# та графічну бібліотеку OpenTK, яка надає доступ до інструментів OpenGL.
-
-Програма починається з імпорту та парсингу перешкод,  які зберігаються у вигляді звичайного JSON-файлу.
-
-Введення користувача відбувається за допомогою миші.
-Після імпорту в рантаймі відбувається перерахунок найкоротшого шляху.
+User input is done using the mouse. After importing at runtime, the shortest path is recalculated.
 
 <p align="center">
   <img src="https://github.com/DenDunno/ComputationalGeometry/blob/master/Report/Screenshot_1.png?raw=true"/>
 </p>
-<p align="center">Початок програми</p>
+<p align="center">Program start</p>
 <p align="center">
   <img src="https://github.com/DenDunno/ComputationalGeometry/blob/master/Report/Screenshot_2.png?raw=true"/>
 </p>
-<p align="center">JSON-файл з перешкодами</p>
+<p align="center">JSON file with obstacles</p>
 <p align="center">
   <img src="https://github.com/DenDunno/ComputationalGeometry/blob/master/Report/Screenshot_3.png?raw=true"/>
 </p>
-<p align="center">Імпорт</p>
+<p align="center">Import</p>
 <p align="center">
   <img src="https://github.com/DenDunno/ComputationalGeometry/blob/master/Report/Screenshot_5.png?raw=true"/>
 </p>
-<p align="center">Граф видимості</p>
+<p align="center">Visibility graph</p>
 <p align="center">
   <img src="https://github.com/DenDunno/ComputationalGeometry/blob/master/Report/Gif2.gif?raw=true"/>
 </p>
-<p align="center">Приклад роботи</p>
+<p align="center">Example of operation</p>
