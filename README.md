@@ -48,7 +48,7 @@ User input is done using the mouse. After importing at runtime, the shortest pat
 </p>
 <p align="center">Program start</p>
 <p align="center">
-  <img src="https://github.com/DenDunno/ComputationalGeometry/blob/master/Report/Screenshot_2.png?raw=true"/>
+  <img src="https://github.com/DenDunno/ComputationalGeometry/blob/master/Report/new.png?raw=true"/>
 </p>
 <p align="center">JSON file with obstacles</p>
 <p align="center">
